@@ -1,6 +1,7 @@
 /.idea/*.*
 /.idea/copyright/*.*
 /.idea/libraries/*.*
+/.idea/scopes/*.*
 /keepUp.iml
 /keepUp-app/keepUp-app.iml
 /keepUp-backEnd/keepUp-backEnd.iml
