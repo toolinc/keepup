@@ -1,0 +1,8 @@
+/.idea/*.*
+/.idea/copyright/*.*
+/.idea/libraries/*.*
+/keepUp.iml
+/keepUp-app/keepUp-app.iml
+/keepUp-backEnd/keepUp-backEnd.iml
+/keepUp-frontEnd/keepUp-frontEnd.iml
+/keepUp-frontEnd/nb-configuration.xml

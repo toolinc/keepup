@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <Or>
+            <Package name="~com[.]udm[.]health[.]persistence([.].*)?"/>
+            <Package name="~com[.]udm[.]health[.]persistence[.]model([.].*)?"/>
+            <Package name="~com[.]udm[.]health[.]persistence[.]model[.]domain([.].*)?"/>
+        </Or>
+        <Or>
+            <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" />
+        </Or>
+    </Match>
+</FindBugsFilter>
