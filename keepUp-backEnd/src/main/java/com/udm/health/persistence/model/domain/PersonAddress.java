@@ -187,7 +187,7 @@ public class PersonAddress extends Model {
         /**
          * Creates a instances of {@link com.udm.health.persistence.model.domain.PersonAddress}
          * given the specified characteristics on the
-         * {@link com.udm.health.persistence.model.domain.PersonAddress.Builder}
+         * {@link com.udm.health.persistence.model.domain.PersonAddress.Builder}.
          *
          * @return a new instance {@link com.udm.health.persistence.model.domain.PersonAddress}
          */

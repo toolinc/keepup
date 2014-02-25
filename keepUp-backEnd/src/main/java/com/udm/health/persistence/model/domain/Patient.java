@@ -174,7 +174,7 @@ public class Patient extends Person {
         /**
          * Creates a instances of {@link com.udm.health.persistence.model.domain.Patient} given
          * the specified characteristics on the
-         * {@link com.udm.health.persistence.model.domain.Patient.Builder}
+         * {@link com.udm.health.persistence.model.domain.Patient.Builder}.
          *
          * @return a new instance {@link com.udm.health.persistence.model.domain.Patient}
          */

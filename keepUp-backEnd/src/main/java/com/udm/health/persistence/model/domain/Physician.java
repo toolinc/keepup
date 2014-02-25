@@ -80,7 +80,7 @@ public class Physician extends Person {
         /**
          * Creates a instances of {@link com.udm.health.persistence.model.domain.Physician} given
          * the specified characteristics on the
-         * {@link com.udm.health.persistence.model.domain.Physician.Builder}
+         * {@link com.udm.health.persistence.model.domain.Physician.Builder}.
          *
          * @return a new instance {@link com.udm.health.persistence.model.domain.Physician}
          */

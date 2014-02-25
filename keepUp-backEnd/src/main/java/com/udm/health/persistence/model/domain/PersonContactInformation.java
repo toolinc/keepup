@@ -137,7 +137,7 @@ public class PersonContactInformation extends Model {
          * Creates a instances of
          * {@link com.udm.health.persistence.model.domain.PersonContactInformation} given the
          * specified characteristics on the
-         * {@link com.udm.health.persistence.model.domain.PersonContactInformation.Builder}
+         * {@link com.udm.health.persistence.model.domain.PersonContactInformation.Builder}.
          *
          * @return a new instance
          *         {@link com.udm.health.persistence.model.domain.PersonContactInformation}

@@ -10,22 +10,22 @@ package com.udm.health.persistence.model.domain;
 public enum USSystemUnits {
 
     /**
-     * Millimetre of mercury
+     * Millimetre of mercury.
      */
     mmHg,
 
     /**
-     * Pound
+     * Pound.
      */
     lb,
 
     /**
-     * Foot
+     * Foot.
      */
     ft,
 
     /**
-     * Fahrenheit
+     * Fahrenheit.
      */
     F
 }

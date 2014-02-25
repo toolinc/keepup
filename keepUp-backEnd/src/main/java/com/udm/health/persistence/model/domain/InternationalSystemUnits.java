@@ -10,22 +10,22 @@ package com.udm.health.persistence.model.domain;
 public enum InternationalSystemUnits {
 
     /**
-     * Millimetre of mercury
+     * Millimetre of mercury.
      */
     mmHg,
 
     /**
-     * Kilogram
+     * Kilogram.
      */
     kg,
 
     /**
-     * Meter
+     * Meter.
      */
     m,
 
     /**
-     * Celsius
+     * Celsius.
      */
     C
 }
