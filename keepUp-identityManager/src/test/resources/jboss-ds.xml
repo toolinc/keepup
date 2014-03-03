@@ -5,9 +5,9 @@
         http://www.jboss.org/ironjacamar/schema
         http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
     <datasource enablement="true"
-                jndi-name="jdbc/arquillian"
+                jndi-name="jdbc/arquillianIdentityManager"
                 pool-name="ArquillianEmbeddedH2Pool">
-        <connection-url>jdbc:h2:/tmp/keepUpTest</connection-url>
+        <connection-url>jdbc:h2:/tmp/keepUpIdentityManagerTest</connection-url>
         <driver>h2</driver>
     </datasource>
 </datasources>
