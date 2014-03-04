@@ -2,7 +2,7 @@
 
 package com.udm.identitymanager;
 
-import com.udm.identitymanager.infrastructure.inject.IdentityManagerModuleTest;
+import com.udm.identitymanager.infrastructure.cdi.IdentityManagerModuleTest;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;

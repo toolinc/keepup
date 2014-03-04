@@ -1,6 +1,6 @@
 // Copyright 2014 University of Detroit Mercy.
 
-package com.udm.identitymanager.infrastructure.inject;
+package com.udm.identitymanager.infrastructure.cdi;
 
 import com.udm.common.adapter.jpa.repository.GenericRepository;
 import com.udm.common.domain.repository.Repository;
