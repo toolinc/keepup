@@ -1,6 +1,6 @@
 // Copyright 2014 University of Detroit Mercy.
 
-package com.udm.identitymanager.domain.service;
+package com.udm.identitymanager.domain.service.identity;
 
 import com.udm.common.AssertionConcern;
 
@@ -21,7 +21,7 @@ public class PasswordService extends AssertionConcern {
 
     /**
      * Creates a random strong password.
-     * 
+     *
      * @return a new strong password
      */
     public String generateStrongPassword() {
@@ -33,22 +33,22 @@ public class PasswordService extends AssertionConcern {
         while (!isStrong) {
             int opt = random.nextInt(4);
             switch (opt) {
-            case 0:
-                index = random.nextInt(LETTERS.length());
-                password.append(LETTERS.substring(index, index+1));
-                break;
-            case 1:
-                index = random.nextInt(LETTERS.length());
-                password.append(LETTERS.substring(index, index+1).toLowerCase());
-                break;
-            case 2:
-                index = random.nextInt(DIGITS.length());
-                password.append(DIGITS.substring(index, index+1));
-                break;
-            case 3:
-                index = random.nextInt(SYMBOLS.length());
-                password.append(SYMBOLS.substring(index, index+1));
-                break;
+                case 0:
+                    index = random.nextInt(LETTERS.length());
+                    password.append(LETTERS.substring(index, index + 1));
+                    break;
+                case 1:
+                    index = random.nextInt(LETTERS.length());
+                    password.append(LETTERS.substring(index, index + 1).toLowerCase());
+                    break;
+                case 2:
+                    index = random.nextInt(DIGITS.length());
+                    password.append(DIGITS.substring(index, index + 1));
+                    break;
+                case 3:
+                    index = random.nextInt(SYMBOLS.length());
+                    password.append(SYMBOLS.substring(index, index + 1));
+                    break;
             }
             generatedPassword = password.toString();
             if (generatedPassword.length() >= 7) {
@@ -60,7 +60,7 @@ public class PasswordService extends AssertionConcern {
 
     /**
      * Validates if a given password is strong.
-     * 
+     *
      * @param aPlainTextPassword the password to be validated.
      * @return true if the provided password is strong, false returned otherwise.
      */
@@ -70,7 +70,7 @@ public class PasswordService extends AssertionConcern {
 
     /**
      * Validates if a given password is very strong.
-     * 
+     *
      * @param aPlainTextPassword the password to be validated.
      * @return true if the provided password is very strong, false returned otherwise.
      */
@@ -80,7 +80,7 @@ public class PasswordService extends AssertionConcern {
 
     /**
      * Validates if a given password is weak.
-     * 
+     *
      * @param aPlainTextPassword the password to be validated.
      * @return true if the provided password is weak, false returned otherwise.
      */

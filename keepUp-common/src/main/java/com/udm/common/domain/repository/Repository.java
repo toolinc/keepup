@@ -2,9 +2,12 @@
 
 package com.udm.common.domain.repository;
 
+import com.udm.common.adapter.jpa.repository.QueryHelper;
 import com.udm.common.domain.model.DomainObject;
 
 import java.util.UUID;
+
+import javax.persistence.EntityManager;
 
 /**
  * Specifies the contract for the Data Access Object pattern.
@@ -14,11 +17,15 @@ import java.util.UUID;
  */
 public interface Repository<T extends DomainObject> {
 
-    T create(T entity);
+    void create(T entity);
 
     T update(T entity);
 
     void delete(T entity);
 
     T findById(UUID key);
+
+    QueryHelper<T, T> newQueryHelper();
+
+    EntityManager getEntityManager();
 }

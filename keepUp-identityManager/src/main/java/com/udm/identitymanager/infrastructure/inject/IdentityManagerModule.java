@@ -1,6 +1,11 @@
 // Copyright 2014 University of Detroit Mercy.
 
-package com.udm.identitymanager.inject;
+package com.udm.identitymanager.infrastructure.inject;
+
+import com.udm.common.adapter.jpa.repository.GenericRepository;
+import com.udm.common.domain.repository.Repository;
+import com.udm.identitymanager.domain.model.access.Group;
+import com.udm.identitymanager.domain.model.identity.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
@@ -14,9 +19,9 @@ import javax.persistence.PersistenceContext;
  * @author Oscar Rico (martinezr.oscar@gmail.com)
  */
 @ApplicationScoped
-public class PersistentModuleTest {
+public class IdentityManagerModule {
 
-    private static final String PERSISTENCE_UNIT = "keepUpIdentityManagerPUTest";
+    private static final String PERSISTENCE_UNIT = "keepUpIdentityManagerPU";
 
     @PersistenceContext(unitName = PERSISTENCE_UNIT)
     private EntityManager entityManager;
@@ -30,5 +35,17 @@ public class PersistentModuleTest {
         if (entityManager.isOpen()) {
             entityManager.close();
         }
+    }
+
+    @Produces
+    public Repository<User> produceUserRepository(EntityManager entityManager) {
+        return new GenericRepository<User>(entityManager) {
+        };
+    }
+
+    @Produces
+    public Repository<Group> producesGroupRepository(EntityManager entityManager) {
+        return new GenericRepository<Group>(entityManager) {
+        };
     }
 }

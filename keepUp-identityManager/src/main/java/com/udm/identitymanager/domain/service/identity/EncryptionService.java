@@ -1,6 +1,6 @@
 // Copyright 2014 University of Detroit Mercy.
 
-package com.udm.identitymanager.domain.service;
+package com.udm.identitymanager.domain.service.identity;
 
 /**
  * Specifies the behavior of the encryption service.

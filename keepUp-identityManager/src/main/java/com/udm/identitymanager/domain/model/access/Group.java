@@ -15,27 +15,27 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 /**
- * Represents a role.
+ * Represents a group.
  *
  * @author Oscar Rico (martinezr.oscar@gmail.com)
  */
 @Entity
-@Table(name = "Role", uniqueConstraints = {
-        @UniqueConstraint(name = "role_uk", columnNames = {"name"})})
-public class Role extends DomainObjectConcurrencySafe {
+@Table(name = "Groups", uniqueConstraints = {
+        @UniqueConstraint(name = "group_uk", columnNames = {"name"})})
+public class Group extends DomainObjectConcurrencySafe {
 
     @Id
-    @Column(name = "idRole")
+    @Column(name = "idGroup")
     private UUID id;
 
     @Column(name = "name", length = 150)
     private String name;
 
     @Deprecated
-    public Role() {
+    public Group() {
     }
 
-    private Role(Builder builder) {
+    private Group(Builder builder) {
         setId(builder.id);
         setName(builder.name);
     }
@@ -57,16 +57,16 @@ public class Role extends DomainObjectConcurrencySafe {
 
     public void setName(String name) {
         assertArgumentNotEmpty(name, "The name cannot be empty or null.");
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**
-     * Builder of {@link com.udm.identitymanager.domain.model.access.Role} instances.
+     * Builder of {@link com.udm.identitymanager.domain.model.access.Group} instances.
      *
      * @author Oscar Rico (martinezr.oscar@gmail.com)
      */
     public static class Builder extends AssertionConcern implements
-            DomainObjectBuilder<Role> {
+            DomainObjectBuilder<Group> {
 
         private UUID id;
         private String name;
@@ -76,30 +76,30 @@ public class Role extends DomainObjectConcurrencySafe {
 
         public Builder setName(String name) {
             assertArgumentNotEmpty(name, "The name cannot be empty or null.");
-            this.name = name;
+            this.name = name.toUpperCase();
             return this;
         }
 
         /**
          * Creates a instances of
-         * {@link com.udm.identitymanager.domain.model.access.Role} given the
+         * {@link com.udm.identitymanager.domain.model.access.Group} given the
          * specified characteristics on the
-         * {@link com.udm.identitymanager.domain.model.access.Role.Builder}.
+         * {@link com.udm.identitymanager.domain.model.access.Group.Builder}.
          *
          * @return a new instance
-         *         {@link com.udm.identitymanager.domain.model.access.Role}
+         *         {@link com.udm.identitymanager.domain.model.access.Group}
          */
         @Override
-        public Role build() {
+        public Group build() {
             id = UUID.randomUUID();
-            return new Role(this);
+            return new Group(this);
         }
 
         /**
          * Provides a new builder.
          *
          * @return a new instance of
-         *         {@link com.udm.identitymanager.domain.model.access.Role.Builder}
+         *         {@link com.udm.identitymanager.domain.model.access.Group.Builder}
          */
         public static Builder newBuilder() {
             return new Builder();

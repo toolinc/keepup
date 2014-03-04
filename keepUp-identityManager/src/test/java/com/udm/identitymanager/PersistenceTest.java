@@ -2,7 +2,7 @@
 
 package com.udm.identitymanager;
 
-import com.udm.identitymanager.inject.PersistentModuleTest;
+import com.udm.identitymanager.infrastructure.inject.IdentityManagerModuleTest;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -33,21 +33,32 @@ public abstract class PersistenceTest {
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class)
                 .addPackage("com.udm.common")
                 .addPackage("com.udm.common.adapter")
-                .addPackage("com.udm.common.adapter.persistence")
+                .addPackage("com.udm.common.adapter.jpa")
+                .addPackage("com.udm.common.adapter.jpa.repository")
                 .addPackage("com.udm.common.domain")
                 .addPackage("com.udm.common.domain.model")
                 .addPackage("com.udm.common.domain.repository")
                 .addPackage("com.udm.common.serializer")
                 .addPackage("com.udm.identitymanager")
+                .addPackage("com.udm.identitymanager.adapter")
+                .addPackage("com.udm.identitymanager.adapter.jpa")
+                .addPackage("com.udm.identitymanager.adapter.jpa.repository")
+                .addPackage("com.udm.identitymanager.adapter.jpa.repository.access")
+                .addPackage("com.udm.identitymanager.adapter.jpa.repository.identity")
                 .addPackage("com.udm.identitymanager.domain")
                 .addPackage("com.udm.identitymanager.domain.model")
                 .addPackage("com.udm.identitymanager.domain.model.access")
                 .addPackage("com.udm.identitymanager.domain.model.identity")
+                .addPackage("com.udm.identitymanager.domain.repository")
+                .addPackage("com.udm.identitymanager.domain.repository.access")
+                .addPackage("com.udm.identitymanager.domain.repository.identity")
                 .addPackage("com.udm.identitymanager.domain.service")
+                .addPackage("com.udm.identitymanager.domain.service.access")
+                .addPackage("com.udm.identitymanager.domain.service.identity")
                 .addPackage("com.udm.identitymanager.domain.validation")
                 .addPackage("com.udm.identitymanager.infrastructure")
                 .addPackage("com.udm.identitymanager.infrastructure.service")
-                .addClass(PersistentModuleTest.class)
+                .addClass(IdentityManagerModuleTest.class)
                 .addAsLibraries(
                         DependencyResolvers.use(MavenDependencyResolver.class)
                                 .goOffline()

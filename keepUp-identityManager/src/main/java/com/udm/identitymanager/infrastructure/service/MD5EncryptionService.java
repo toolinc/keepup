@@ -3,7 +3,7 @@
 package com.udm.identitymanager.infrastructure.service;
 
 import com.udm.common.AssertionConcern;
-import com.udm.identitymanager.domain.service.EncryptionService;
+import com.udm.identitymanager.domain.service.identity.EncryptionService;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

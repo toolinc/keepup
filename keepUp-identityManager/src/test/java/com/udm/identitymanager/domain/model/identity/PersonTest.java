@@ -20,9 +20,6 @@ import javax.transaction.UserTransaction;
 public class PersonTest extends PersistenceTest {
 
     @Inject
-    private EntityManager em;
-
-    @Inject
     private UserTransaction tx;
 
     @Test
