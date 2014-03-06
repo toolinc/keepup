@@ -4,7 +4,7 @@ package com.udm.identitymanager.infrastructure.cdi;
 
 import com.udm.common.adapter.jpa.repository.JpaRepository;
 import com.udm.common.domain.event.DomainEventPublisher;
-import com.udm.common.domain.event.Event;
+import com.udm.common.adapter.jpa.event.Event;
 import com.udm.common.domain.repository.Repository;
 import com.udm.identitymanager.domain.DomainRegistry;
 import com.udm.identitymanager.domain.model.access.Group;

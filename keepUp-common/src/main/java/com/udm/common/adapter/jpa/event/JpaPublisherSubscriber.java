@@ -6,9 +6,6 @@ import com.udm.common.AssertionConcern;
 import com.udm.common.domain.event.DomainEvent;
 import com.udm.common.domain.event.EventPublisher;
 import com.udm.common.domain.event.EventSubscriber;
-import com.udm.common.domain.repository.EventRepository;
-
-import org.jboss.logging.Logger;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -27,12 +24,11 @@ import javax.inject.Inject;
 public class JpaPublisherSubscriber extends AssertionConcern implements EventPublisher,
         EventSubscriber<DomainEvent> {
 
-    private Logger logger = Logger.getLogger(getClass());
     private List<EventSubscriber<DomainEvent>> subscribers;
-    private EventRepository repository;
+    private JpaEventRepository repository;
 
     @Inject
-    public JpaPublisherSubscriber(EventRepository repository) {
+    public JpaPublisherSubscriber(JpaEventRepository repository) {
         assertArgumentNotNull(repository, "EventRepository cannot be null.");
         this.repository = repository;
         subscribe(this);
@@ -109,5 +105,4 @@ public class JpaPublisherSubscriber extends AssertionConcern implements EventPub
     private List<EventSubscriber<DomainEvent>> subscribers() {
         return subscribers;
     }
-
 }

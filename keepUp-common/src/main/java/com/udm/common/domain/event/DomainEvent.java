@@ -11,7 +11,17 @@ import java.util.Date;
  */
 public interface DomainEvent {
 
+    /**
+     * Provides the event version.
+     *
+     * @return the version number
+     */
     public int getEventVersion();
 
+    /**
+     * Provides the date in which the event was produced
+     *
+     * @return the date of the event.
+     */
     public Date getOccurredOn();
 }

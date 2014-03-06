@@ -1,8 +1,9 @@
 // Copyright 2014 University of Detroit Mercy.
 
-package com.udm.common.domain.event;
+package com.udm.common.adapter.jpa.event;
 
 import com.udm.common.AssertionConcern;
+import com.udm.common.domain.event.DomainEvent;
 import com.udm.common.domain.model.DomainObjectBuilder;
 import com.udm.common.domain.model.DomainObjectConcurrencySafe;
 import com.udm.common.serializer.EventSerializer;
@@ -121,7 +122,7 @@ public class Event extends DomainObjectConcurrencySafe {
     }
 
     /**
-     * Builder of {@link com.udm.common.domain.event.Event} instances.
+     * Builder of {@link Event} instances.
      *
      * @author Oscar Rico (martinezr.oscar@gmail.com)
      */
@@ -148,10 +149,10 @@ public class Event extends DomainObjectConcurrencySafe {
         }
 
         /**
-         * Creates a instances of {@link com.udm.common.domain.event.Event} given the specified
-         * characteristics on the {@link com.udm.common.domain.event.Event.Builder}.
+         * Creates a instances of {@link Event} given the specified
+         * characteristics on the {@link Event.Builder}.
          *
-         * @return a new instance {@link com.udm.common.domain.event.Event}
+         * @return a new instance {@link Event}
          */
         @Override
         public Event build() {
@@ -162,7 +163,7 @@ public class Event extends DomainObjectConcurrencySafe {
         /**
          * Provides a new builder.
          *
-         * @return a new instance of {@link com.udm.common.domain.event.Event.Builder}
+         * @return a new instance of {@link Event.Builder}
          */
         public static Builder newBuilder() {
             return new Builder();
