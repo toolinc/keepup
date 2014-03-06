@@ -20,13 +20,14 @@ import javax.persistence.EntityManager;
  * @param <T> Specifies the entity of the Repository.
  * @author Oscar Rico (martinezr.oscar@gmail.com)
  */
-public abstract class GenericRepository<T extends DomainObject> implements Repository<T> {
+public abstract class JpaRepository<T extends DomainObject> implements Repository<T> {
 
     private final EntityManager em;
     private final Class<T> clazz;
 
     @Inject
-    public GenericRepository(EntityManager entityManager) {
+    @SuppressWarnings("unchecked")
+    public JpaRepository(EntityManager entityManager) {
         Type type = getClass().getGenericSuperclass();
         ParameterizedType parameterizedType = (ParameterizedType) type;
         Object clase = parameterizedType.getActualTypeArguments()[0];

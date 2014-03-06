@@ -52,8 +52,12 @@ public class Enablement extends AssertionConcern implements Serializable {
                     "Enablement start and/or end date is invalid.");
         }
         this.enabled = anEnabled;
-        this.startDate = aStartDate;
-        this.endDate = anEndDate;
+        if (aStartDate != null) {
+            this.startDate = newDate(aStartDate);
+        }
+        if (anEndDate != null) {
+            this.endDate = newDate(anEndDate);
+        }
     }
 
     public boolean isEnabled() {
@@ -61,11 +65,17 @@ public class Enablement extends AssertionConcern implements Serializable {
     }
 
     public Date getStartDate() {
-        return this.startDate;
+        if (startDate != null) {
+            return newDate(startDate);
+        }
+        return null;
     }
 
     public Date getEndDate() {
-        return this.endDate;
+        if (endDate != null) {
+            return newDate(endDate);
+        }
+        return null;
     }
 
     /**

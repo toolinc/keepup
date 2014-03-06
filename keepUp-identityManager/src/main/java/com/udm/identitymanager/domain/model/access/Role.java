@@ -57,7 +57,7 @@ public class Role extends DomainObjectConcurrencySafe {
 
     public void setName(String name) {
         assertArgumentNotEmpty(name, "The name cannot be empty or null.");
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**
@@ -76,7 +76,7 @@ public class Role extends DomainObjectConcurrencySafe {
 
         public Builder setName(String name) {
             assertArgumentNotEmpty(name, "The name cannot be empty or null.");
-            this.name = name;
+            this.name = name.toUpperCase();
             return this;
         }
 

@@ -12,6 +12,14 @@ import com.udm.identitymanager.domain.model.identity.User;
 public interface UserRepository {
 
     /**
+     * Stores a new {@link com.udm.identitymanager.domain.model.identity.User} on the persistent
+     * storage.
+     *
+     * @param user the item to store
+     */
+    void create(User user);
+
+    /**
      * Retrieves a user for the specified user name.
      *
      * @param userName the user name that will be look up

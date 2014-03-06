@@ -2,14 +2,15 @@
 
 package com.udm.identitymanager.infrastructure.cdi;
 
-import com.udm.common.adapter.jpa.repository.GenericRepository;
+import com.udm.common.adapter.jpa.repository.JpaRepository;
 import com.udm.common.domain.repository.Repository;
 import com.udm.identitymanager.domain.model.access.Group;
 import com.udm.identitymanager.domain.model.identity.User;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,6 +24,9 @@ public class IdentityManagerModule {
 
     private static final String PERSISTENCE_UNIT = "keepUpIdentityManagerPU";
 
+    @Inject
+    private BeanManager beanManager;
+
     @PersistenceContext(unitName = PERSISTENCE_UNIT)
     private EntityManager entityManager;
 
@@ -31,21 +35,15 @@ public class IdentityManagerModule {
         return entityManager;
     }
 
-    public void closeEntityManager(@Disposes EntityManager entityManager) {
-        if (entityManager.isOpen()) {
-            entityManager.close();
-        }
-    }
-
     @Produces
     public Repository<User> produceUserRepository(EntityManager entityManager) {
-        return new GenericRepository<User>(entityManager) {
+        return new JpaRepository<User>(entityManager) {
         };
     }
 
     @Produces
     public Repository<Group> producesGroupRepository(EntityManager entityManager) {
-        return new GenericRepository<Group>(entityManager) {
+        return new JpaRepository<Group>(entityManager) {
         };
     }
 }

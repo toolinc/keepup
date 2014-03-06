@@ -4,9 +4,11 @@ package com.udm.identitymanager.domain.model.identity;
 
 import com.udm.common.AssertionConcern;
 import com.udm.common.domain.model.DomainObjectBuilder;
+import com.udm.identitymanager.domain.DomainRegistry;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +27,7 @@ import javax.validation.constraints.NotNull;
 public class PersonUser extends User {
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPerson", referencedColumnName = "idPerson",
             foreignKey = @ForeignKey(name = "user_person_fk"))
     private Person person;
@@ -39,6 +41,7 @@ public class PersonUser extends User {
         setUserName(builder.userName);
         setPassword(builder.password);
         setPerson(builder.person);
+        setEnablement(builder.enablement);
     }
 
     public Person getPerson() {
@@ -75,7 +78,9 @@ public class PersonUser extends User {
 
         public Builder setPassword(String password) {
             assertArgumentNotEmpty(password, "The provided password is null or empty.");
-            this.password = password;
+            assertPasswordNotWeak(password);
+            assertUsernamePasswordNotSame(password);
+            this.password = asEncryptedValue(password);
             return this;
         }
 
@@ -89,6 +94,20 @@ public class PersonUser extends User {
             assertArgumentNotNull(person, "The given person cannot be null.");
             this.person = person;
             return this;
+        }
+
+        private String asEncryptedValue(String aPlainTextPassword) {
+            return DomainRegistry.encryptionService().encrypt(aPlainTextPassword);
+        }
+
+        private void assertPasswordNotWeak(String aPlainTextPassword) {
+            this.assertArgumentFalse(DomainRegistry.passwordService().isWeak(aPlainTextPassword),
+                    "The password must be stronger.");
+        }
+
+        private void assertUsernamePasswordNotSame(String aPlainTextPassword) {
+            this.assertArgumentNotEquals(userName, aPlainTextPassword,
+                    "The username and password must not be the same.");
         }
 
         /**

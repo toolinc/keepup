@@ -1,6 +1,6 @@
 // Copyright 2014 University of Detroit Mercy.
 
-package com.udm.common.domain.model;
+package com.udm.common.domain.event;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public interface DomainEvent {
 
-    public int eventVersion();
+    public int getEventVersion();
 
-    public Date occurredOn();
+    public Date getOccurredOn();
 }

@@ -49,6 +49,8 @@ public class PasswordService extends AssertionConcern {
                     index = random.nextInt(SYMBOLS.length());
                     password.append(SYMBOLS.substring(index, index + 1));
                     break;
+                default:
+                    throw new IllegalStateException("Unsupported option.");
             }
             generatedPassword = password.toString();
             if (generatedPassword.length() >= 7) {

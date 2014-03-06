@@ -6,6 +6,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  * Provides different assertions.
  *
@@ -18,6 +21,10 @@ public class AssertionConcern {
     }
 
     protected void assertArgumentEquals(Object anObject1, Object anObject2, String aMessage) {
+        checkState(anObject1.equals(anObject2), aMessage);
+    }
+
+    protected void assertArgumentNotEquals(Object anObject1, Object anObject2, String aMessage) {
         checkState(!anObject1.equals(anObject2), aMessage);
     }
 
@@ -43,5 +50,19 @@ public class AssertionConcern {
         if (length < aMinimum || length > aMaximum) {
             throw new IllegalArgumentException(aMessage);
         }
+    }
+
+    protected Date newDate(Date time) {
+        checkNotNull(time, "Date should not be [null].");
+        return newDate(time.getTime());
+    }
+
+    protected Date newDate(long time) {
+        return new Date(time);
+    }
+
+    protected static Date newDate(int year, int month, int dayOfMonth) {
+        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, dayOfMonth);
+        return calendar.getTime();
     }
 }

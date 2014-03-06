@@ -20,7 +20,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -111,12 +110,12 @@ public class Person extends DomainObjectConcurrencySafe {
     }
 
     public Date getDateOfBirth() {
-        return dateOfBirth;
+        return newDate(dateOfBirth);
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
         assertArgumentNotNull(dateOfBirth, "The date of birth cannot be null.");
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = newDate(dateOfBirth);
     }
 
     public ContactInformation getContactInformation() {
@@ -166,7 +165,7 @@ public class Person extends DomainObjectConcurrencySafe {
 
         public Builder setDateOfBirth(Date dateOfBirth) {
             assertArgumentNotNull(dateOfBirth, "The date of birth cannot be null.");
-            this.dateOfBirth = dateOfBirth;
+            this.dateOfBirth = newDate(dateOfBirth);
             return this;
         }
 

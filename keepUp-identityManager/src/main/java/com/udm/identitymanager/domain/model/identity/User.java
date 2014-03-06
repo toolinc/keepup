@@ -3,6 +3,7 @@
 package com.udm.identitymanager.domain.model.identity;
 
 import com.udm.common.domain.model.DomainObjectConcurrencySafe;
+import com.udm.identitymanager.domain.DomainRegistry;
 
 import java.util.UUID;
 
@@ -82,5 +83,37 @@ public abstract class User extends DomainObjectConcurrencySafe {
     public void setEnablement(Enablement enablement) {
         assertArgumentNotNull(enablement, "The provide enablement is null.");
         this.enablement = enablement;
+    }
+
+    public void changePassword(String aCurrentPassword, String aChangedPassword) {
+        assertArgumentNotEmpty(aCurrentPassword, "Current password must be provided.");
+        assertArgumentEquals(getPassword(), asEncryptedValue(aCurrentPassword),
+                "Current password not confirmed.");
+        protectPassword(aCurrentPassword, aChangedPassword);
+    }
+
+    private String asEncryptedValue(String aPlainTextPassword) {
+        return DomainRegistry.encryptionService().encrypt(aPlainTextPassword);
+    }
+
+    private void protectPassword(String aCurrentPassword, String aChangedPassword) {
+        assertPasswordsNotSame(aCurrentPassword, aChangedPassword);
+        assertPasswordNotWeak(aChangedPassword);
+        assertUsernamePasswordNotSame(aChangedPassword);
+        setPassword(this.asEncryptedValue(aChangedPassword));
+    }
+
+    private void assertPasswordsNotSame(String aCurrentPassword, String aChangedPassword) {
+        assertArgumentNotEquals(aCurrentPassword, aChangedPassword, "The password is unchanged.");
+    }
+
+    private void assertPasswordNotWeak(String aPlainTextPassword) {
+        this.assertArgumentFalse(DomainRegistry.passwordService().isWeak(aPlainTextPassword),
+                "The password must be stronger.");
+    }
+
+    private void assertUsernamePasswordNotSame(String aPlainTextPassword) {
+        this.assertArgumentNotEquals(getUserName(), aPlainTextPassword,
+                "The username and password must not be the same.");
     }
 }

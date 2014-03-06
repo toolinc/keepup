@@ -2,13 +2,9 @@
 
 package com.udm.common.domain.model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.udm.common.AssertionConcern;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,19 +41,5 @@ public abstract class DomainObject extends AssertionConcern implements Serializa
         }
         final DomainObject other = (DomainObject) obj;
         return Objects.equals(getId(), other.getId());
-    }
-
-    protected Date newDate(Date time) {
-        checkNotNull(time, "Date should not be [null].");
-        return newDate(time.getTime());
-    }
-
-    protected Date newDate(long time) {
-        return new Date(time);
-    }
-
-    protected static Date newDate(int year, int month, int dayOfMonth) {
-        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, dayOfMonth);
-        return calendar.getTime();
     }
 }

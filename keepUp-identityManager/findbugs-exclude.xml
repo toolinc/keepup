@@ -4,6 +4,7 @@
         <Or>
             <Package name="~com[.]udm[.]identitymanager[.]domain([.].*)?"/>
             <Package name="~com[.]udm[.]identitymanager[.]domain[.]model([.].*)?"/>
+            <Package name="~com[.]udm[.]identitymanager[.]domain[.]model[.]identity([.].*)?"/>
         </Or>
         <Or>
             <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" />
