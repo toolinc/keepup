@@ -19,7 +19,7 @@ public interface DomainEvent {
     public int getEventVersion();
 
     /**
-     * Provides the date in which the event was produced
+     * Provides the date in which the event was produced.
      *
      * @return the date of the event.
      */

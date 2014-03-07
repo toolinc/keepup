@@ -53,7 +53,7 @@ public class UserRepositoryJpa extends AssertionConcern implements UserRepositor
         try {
             qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(User_.userName), userName));
             user = qh.getSingleResult();
-        } catch (NoResultException exc){
+        } catch (NoResultException exc) {
         }
         return user;
     }
