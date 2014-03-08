@@ -60,7 +60,7 @@ public class ContactInformation extends AssertionConcern implements Serializable
         }
         ContactInformation typedObject = (ContactInformation) anObject;
         return Objects.equals(getEmailAddress(), typedObject.getEmailAddress()) &&
-               Objects.equals(getTelephoneNumber(), typedObject.getTelephoneNumber());
+                Objects.equals(getTelephoneNumber(), typedObject.getTelephoneNumber());
     }
 
     @Override

@@ -182,7 +182,7 @@ public class Person extends DomainObjectConcurrencySafe {
          * {@link com.udm.identitymanager.domain.model.identity.Person.Builder}.
          *
          * @return a new instance
-         *         {@link com.udm.identitymanager.domain.model.identity.Person}
+         * {@link com.udm.identitymanager.domain.model.identity.Person}
          */
         @Override
         public Person build() {
@@ -194,7 +194,7 @@ public class Person extends DomainObjectConcurrencySafe {
          * Provides a new builder.
          *
          * @return a new instance of
-         *         {@link com.udm.identitymanager.domain.model.identity.Person.Builder}
+         * {@link com.udm.identitymanager.domain.model.identity.Person.Builder}
          */
         public static Builder newBuilder() {
             return new Builder();

@@ -54,7 +54,7 @@ public class PersonUser extends User {
     }
 
     /**
-     * Builder of {@link PersonUser} instances.
+     * Builder of {@link com.udm.identitymanager.domain.model.identity.PersonUser} instances.
      *
      * @author Oscar Rico (martinezr.oscar@gmail.com)
      */
@@ -111,13 +111,11 @@ public class PersonUser extends User {
         }
 
         /**
-         * Creates a instances of
-         * {@link com.udm.identitymanager.domain.model.identity.PersonUser} given the
-         * specified characteristics on the
+         * Creates a instances of {@link com.udm.identitymanager.domain.model.identity.PersonUser}
+         * given the specified characteristics on the
          * {@link com.udm.identitymanager.domain.model.identity.PersonUser.Builder}.
          *
-         * @return a new instance
-         *         {@link com.udm.identitymanager.domain.model.identity.PersonUser}
+         * @return a new instance {@link com.udm.identitymanager.domain.model.identity.PersonUser}
          */
         @Override
         public PersonUser build() {
@@ -129,7 +127,7 @@ public class PersonUser extends User {
          * Provides a new builder.
          *
          * @return a new instance of
-         *         {@link com.udm.identitymanager.domain.model.identity.PersonUser.Builder}
+         * {@link com.udm.identitymanager.domain.model.identity.PersonUser.Builder}
          */
         public static Builder newBuilder() {
             return new Builder();
