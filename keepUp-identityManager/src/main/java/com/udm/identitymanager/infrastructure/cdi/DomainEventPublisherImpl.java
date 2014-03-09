@@ -30,8 +30,7 @@ public class DomainEventPublisherImpl extends DomainEventPublisher {
 
     @Override
     protected EventPublisher eventPublisher() {
-        EventPublisher eventPublisher = LOCAL.get();
-        if (eventPublisher == null) {
+        if (LOCAL.get() == null) {
             LOCAL.set(provider.get());
         }
         return LOCAL.get();
