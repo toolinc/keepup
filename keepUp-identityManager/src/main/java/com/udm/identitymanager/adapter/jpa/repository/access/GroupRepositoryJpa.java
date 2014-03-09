@@ -2,7 +2,7 @@
 
 package com.udm.identitymanager.adapter.jpa.repository.access;
 
-import static javax.transaction.Transactional.TxType.SUPPORTS;
+import static javax.transaction.Transactional.TxType.REQUIRED;
 
 import com.udm.common.AssertionConcern;
 import com.udm.common.domain.repository.Repository;
@@ -28,7 +28,7 @@ public class GroupRepositoryJpa extends AssertionConcern implements GroupReposit
         this.repository = groupRepository;
     }
 
-    @Transactional(SUPPORTS)
+    @Transactional(REQUIRED)
     @Override
     public void create(Group group) {
         repository.create(group);
