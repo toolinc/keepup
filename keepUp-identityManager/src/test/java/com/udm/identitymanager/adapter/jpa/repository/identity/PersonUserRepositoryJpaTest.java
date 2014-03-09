@@ -45,8 +45,8 @@ public class PersonUserRepositoryJpaTest extends PersistenceTest {
     public void shouldCreateUser() throws Exception {
         String userName = "newUserName";
         String pass = "9t43si8d7ajs9d0j!";
-        String name = "John";
-        String lastName = "Smith";
+        String name = "Edward";
+        String lastName = "Green";
         Date dob = new GregorianCalendar(1978, 02, 04).getTime();
         String email = String.format("%s.%s@hotmail.com", name.toLowerCase(),
                 lastName.toLowerCase());

@@ -6,9 +6,6 @@ import com.udm.common.AssertionConcern;
 import com.udm.identitymanager.domain.service.identity.EncryptionService;
 import com.udm.identitymanager.domain.service.identity.PasswordService;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 /**
  * Serves as a repository of services.
  *

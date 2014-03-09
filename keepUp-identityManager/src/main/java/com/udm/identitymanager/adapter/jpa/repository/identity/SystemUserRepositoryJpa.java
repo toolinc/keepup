@@ -10,7 +10,6 @@ import com.udm.common.adapter.jpa.repository.QueryHelper;
 import com.udm.common.domain.event.DomainEventPublisher;
 import com.udm.common.domain.repository.Repository;
 import com.udm.identitymanager.domain.event.identity.UserRegistered;
-import com.udm.identitymanager.domain.model.identity.PersonUser;
 import com.udm.identitymanager.domain.model.identity.SystemUser;
 import com.udm.identitymanager.domain.model.identity.User_;
 import com.udm.identitymanager.domain.repository.identity.UserRepository;
