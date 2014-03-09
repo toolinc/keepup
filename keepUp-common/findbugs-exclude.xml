@@ -2,7 +2,7 @@
 <FindBugsFilter>
     <Match>
         <Or>
-            <Package name="~com[.]udm[.]common[.]adapter[.]jpa[.]event[.]Event(*)?"/>
+            <Package name="~com[.]udm[.]common[.]adapter[.]jpa[.]event[.][Event_([.].*)]?"/>
             <Package name="~com[.]udm[.]common[.]domain([.].*)?"/>
             <Package name="~com[.]udm[.]common[.]domain[.]model([.].*)?"/>
         </Or>
