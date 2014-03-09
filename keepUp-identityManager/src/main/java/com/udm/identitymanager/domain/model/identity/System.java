@@ -9,7 +9,7 @@ import static javax.persistence.FetchType.LAZY;
 import com.udm.common.AssertionConcern;
 import com.udm.common.domain.model.DomainObjectBuilder;
 import com.udm.common.domain.model.DomainObjectConcurrencySafe;
-import com.udm.identitymanager.domain.validation.PersonName;
+import com.udm.identitymanager.domain.validation.SystemName;
 
 import java.util.UUID;
 
@@ -36,8 +36,8 @@ public class System extends DomainObjectConcurrencySafe {
     @Column(name = "idSystem")
     private UUID id;
 
-    @PersonName
-    @Column(name = "name", length = 45, nullable = false)
+    @SystemName
+    @Column(name = "name", length = 150, nullable = false)
     private String name;
 
     @NotNull
@@ -51,6 +51,9 @@ public class System extends DomainObjectConcurrencySafe {
     }
 
     private System(Builder builder) {
+        setId(builder.id);
+        setName(builder.name);
+        setAdministrator(builder.administrator);
     }
 
     @Override

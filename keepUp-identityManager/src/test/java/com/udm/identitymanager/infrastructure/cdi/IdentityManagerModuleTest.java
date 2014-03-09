@@ -2,13 +2,14 @@
 
 package com.udm.identitymanager.infrastructure.cdi;
 
+import com.udm.common.adapter.jpa.event.Event;
 import com.udm.common.adapter.jpa.repository.JpaRepository;
 import com.udm.common.domain.event.DomainEventPublisher;
-import com.udm.common.adapter.jpa.event.Event;
 import com.udm.common.domain.repository.Repository;
 import com.udm.identitymanager.domain.DomainRegistry;
 import com.udm.identitymanager.domain.model.access.Group;
-import com.udm.identitymanager.domain.model.identity.User;
+import com.udm.identitymanager.domain.model.identity.PersonUser;
+import com.udm.identitymanager.domain.model.identity.SystemUser;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -48,8 +49,14 @@ public class IdentityManagerModuleTest {
     }
 
     @Produces
-    public Repository<User> produceUserRepository(EntityManager entityManager) {
-        return new JpaRepository<User>(entityManager) {
+    public Repository<PersonUser> producePersonUserRepository(EntityManager entityManager) {
+        return new JpaRepository<PersonUser>(entityManager) {
+        };
+    }
+
+    @Produces
+    public Repository<SystemUser> produceSystemUserRepository(EntityManager entityManager) {
+        return new JpaRepository<SystemUser>(entityManager) {
         };
     }
 
