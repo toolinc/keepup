@@ -5,8 +5,10 @@ package com.udm.identitymanager.resource;
 import com.udm.common.AssertionConcern;
 import com.udm.identitymanager.application.IdentityApplicationService;
 import com.udm.identitymanager.application.command.RegisterPersonUserCommand;
+import com.udm.identitymanager.application.command.RegisterSystemUserCommand;
 import com.udm.identitymanager.domain.IdentityManagementException;
 import com.udm.identitymanager.domain.model.identity.PersonUser;
+import com.udm.identitymanager.domain.model.identity.SystemUser;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -30,10 +32,19 @@ public class IdentityResource extends AssertionConcern {
 
     @POST
     @Path("/register/person")
-    public boolean registerPersonUser(RegisterPersonUserCommand registerPersonUserCommand) throws
+    public boolean registerUser(RegisterPersonUserCommand registerPersonUserCommand) throws
             IdentityManagementException {
         PersonUser personUser =
-                identityApplicationService.registerPersonUser(registerPersonUserCommand);
+                identityApplicationService.registerUser(registerPersonUserCommand);
+        return true;
+    }
+
+    @POST
+    @Path("/register/system")
+    public boolean registerUser(RegisterSystemUserCommand registerSystemUserCommand) throws
+            IdentityManagementException {
+        SystemUser systemUser =
+                identityApplicationService.registerUser(registerSystemUserCommand);
         return true;
     }
 }

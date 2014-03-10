@@ -5,6 +5,7 @@ package com.udm.identitymanager.domain.service.identity;
 import com.udm.common.AssertionConcern;
 import com.udm.identitymanager.domain.IdentityManagementException;
 import com.udm.identitymanager.domain.model.identity.PersonUser;
+import com.udm.identitymanager.domain.model.identity.SystemUser;
 import com.udm.identitymanager.domain.repository.identity.UserRepository;
 
 import javax.inject.Inject;
@@ -19,11 +20,15 @@ public class IdentityService extends AssertionConcern {
     private static final String USER_NAME_EXIST =
             "com.udm.identitymanager.domain.service.identity.IdentityService";
     private final UserRepository<PersonUser> personUserRepository;
+    private final UserRepository<SystemUser> systemUserRepository;
 
     @Inject
-    public IdentityService(UserRepository<PersonUser> personUserRepository) {
+    public IdentityService(UserRepository<PersonUser> personUserRepository,
+                           UserRepository<SystemUser> systemUserRepository) {
         assertArgumentNotNull(personUserRepository, "PersonUserRepository cannot be null.");
+        assertArgumentNotNull(systemUserRepository, "SystemUserRepository cannot be null.");
         this.personUserRepository = personUserRepository;
+        this.systemUserRepository = systemUserRepository;
     }
 
     /**
@@ -33,12 +38,29 @@ public class IdentityService extends AssertionConcern {
      * @param personUser the user that will be register
      * @throws IdentityManagementException if a user cannot be created
      */
-    public void registerPersonUser(PersonUser personUser) throws IdentityManagementException {
+    public void registerUser(PersonUser personUser) throws IdentityManagementException {
         if (personUserRepository.userWithUserName(personUser.getUserName()) == null) {
             personUserRepository.create(personUser);
         } else {
             throw IdentityManagementException.Builder.newBuilder()
                     .setMessage(USER_NAME_EXIST, personUser.getUserName())
+                    .build();
+        }
+    }
+
+    /**
+     * Register a new {@link com.udm.identitymanager.domain.model.identity.SystemUser} on the
+     * system.
+     *
+     * @param systemUser the user that will be register
+     * @throws IdentityManagementException if a user cannot be created
+     */
+    public void registerUser(SystemUser systemUser) throws IdentityManagementException {
+        if (systemUserRepository.userWithUserName(systemUser.getUserName()) == null) {
+            systemUserRepository.create(systemUser);
+        } else {
+            throw IdentityManagementException.Builder.newBuilder()
+                    .setMessage(USER_NAME_EXIST, systemUser.getUserName())
                     .build();
         }
     }

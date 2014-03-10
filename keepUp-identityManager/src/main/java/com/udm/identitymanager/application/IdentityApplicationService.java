@@ -4,14 +4,10 @@ package com.udm.identitymanager.application;
 
 import com.udm.common.AssertionConcern;
 import com.udm.identitymanager.application.command.RegisterPersonUserCommand;
+import com.udm.identitymanager.application.command.RegisterSystemUserCommand;
 import com.udm.identitymanager.domain.IdentityManagementException;
-import com.udm.identitymanager.domain.model.identity.ContactInformation;
-import com.udm.identitymanager.domain.model.identity.EmailAddress;
-import com.udm.identitymanager.domain.model.identity.Enablement;
-import com.udm.identitymanager.domain.model.identity.Gender;
-import com.udm.identitymanager.domain.model.identity.Person;
-import com.udm.identitymanager.domain.model.identity.PersonUser;
-import com.udm.identitymanager.domain.model.identity.TelephoneNumber;
+import com.udm.identitymanager.domain.model.identity.*;
+import com.udm.identitymanager.domain.model.identity.System;
 import com.udm.identitymanager.domain.service.identity.IdentityService;
 
 import javax.inject.Inject;
@@ -39,7 +35,7 @@ public class IdentityApplicationService extends AssertionConcern {
      * @return a new {@link com.udm.identitymanager.domain.model.identity.PersonUser}
      * @throws IdentityManagementException if a user cannot be created
      */
-    public PersonUser registerPersonUser(RegisterPersonUserCommand command) throws
+    public PersonUser registerUser(RegisterPersonUserCommand command) throws
             IdentityManagementException {
         PersonUser personUser = PersonUser.Builder.newBuilder()
                 .setUserName(command.getUsername())
@@ -49,17 +45,51 @@ public class IdentityApplicationService extends AssertionConcern {
                         command.getStartDate(),
                         command.getEndDate()))
                 .setPerson(Person.Builder.newBuilder()
-                        .setName(command.getFirstName())
-                        .setLastName(command.getLastName())
-                        .setGender(Gender.valueOf(command.getGender().toUpperCase()))
-                        .setDateOfBirth(command.getDateOfBirth())
+                        .setName(command.getPerson().getFirstName())
+                        .setLastName(command.getPerson().getLastName())
+                        .setGender(Gender.valueOf(command.getPerson().getGender()))
+                        .setDateOfBirth(command.getPerson().getDateOfBirth())
                         .setContactInformation(new ContactInformation(
-                                new EmailAddress(command.getEmailAddress()),
-                                new TelephoneNumber(command.getTelephone())
+                                new EmailAddress(command.getPerson().getEmailAddress()),
+                                new TelephoneNumber(command.getPerson().getTelephone())
                         ))
                         .build())
                 .build();
-        identityService.registerPersonUser(personUser);
+        identityService.registerUser(personUser);
         return personUser;
+    }
+
+    /**
+     * Register a new {@link com.udm.identitymanager.domain.model.identity.SystemUser} on the
+     * system.
+     *
+     * @param command the details that will be used to create the new user.
+     * @return a new {@link com.udm.identitymanager.domain.model.identity.SystemUser}
+     * @throws IdentityManagementException if a user cannot be created
+     */
+    public SystemUser registerUser(RegisterSystemUserCommand command) throws
+            IdentityManagementException {
+        SystemUser systemUser = SystemUser.Builder.newBuilder()
+                .setUserName(command.getUsername())
+                .setPassword(command.getPassword())
+                .setEnablement(new Enablement(
+                        command.isEnabled(),
+                        command.getStartDate(),
+                        command.getEndDate()))
+                .setSystem(System.Builder.newBuilder()
+                        .setName(command.getSystemName())
+                        .setAdministrator(Person.Builder.newBuilder()
+                            .setName(command.getAdministrator().getFirstName())
+                            .setLastName(command.getAdministrator().getLastName())
+                            .setGender(Gender.valueOf(command.getAdministrator().getGender()))
+                            .setDateOfBirth(command.getAdministrator().getDateOfBirth())
+                            .setContactInformation(new ContactInformation(
+                                new EmailAddress(command.getAdministrator().getEmailAddress()),
+                                new TelephoneNumber(command.getAdministrator().getTelephone())
+                            )).build())
+                        .build())
+                .build();
+        identityService.registerUser(systemUser);
+        return systemUser;
     }
 }

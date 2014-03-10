@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.udm.identitymanager.PersistenceTest;
 import com.udm.identitymanager.application.command.RegisterPersonUserCommand;
+import com.udm.identitymanager.application.command.RegisterSystemUserCommand;
 import com.udm.identitymanager.infrastructure.resource.GsonProvider;
 import com.udm.identitymanager.infrastructure.resource.JaxRsActivator;
 
@@ -49,12 +50,25 @@ public class IdentityResourceTest extends PersistenceTest {
     }
 
     @Test
-    public void testGetCustomerByIdUsingClientRequest() throws Exception {
-        RegisterPersonUserCommand command = new RegisterPersonUserCommand("restClientPersonUser",
-                "9!2swT59320", "Kit", "Temple", "FEMALE",
+    public void shouldRegisterPersonUser() throws Exception {
+        RegisterPersonUserCommand command = new RegisterPersonUserCommand("restPersonUser",
+                "1970#swT59526", "Kit", "Temple", "FEMALE",
                 new GregorianCalendar(1970, 5, 26).getTime(), true, null, null,
                 "kit.temple@gmail.com", "1234567890");
         Response response = target.path("register/person")
+                .request()
+                .post(Entity.entity(command, mediaType), Response.class);
+        assertThat(response.getStatus(), is(200));
+        assertTrue(response.readEntity(Boolean.class));
+    }
+
+    @Test
+    public void shouldRegisterSystemUser() throws Exception {
+        RegisterSystemUserCommand command = new RegisterSystemUserCommand("restSystemUser",
+                "1995!2$%^Gj59326", "restSystem", "Tim", "OGrady", "FEMALE",
+                new GregorianCalendar(1995, 3, 26).getTime(), true, null, null,
+                "tim.ogrady@gmail.com", "1234567890");
+        Response response = target.path("register/system")
                 .request()
                 .post(Entity.entity(command, mediaType), Response.class);
         assertThat(response.getStatus(), is(200));
