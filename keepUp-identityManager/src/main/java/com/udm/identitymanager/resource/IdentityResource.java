@@ -4,6 +4,7 @@ package com.udm.identitymanager.resource;
 
 import com.udm.common.AssertionConcern;
 import com.udm.identitymanager.application.IdentityApplicationService;
+import com.udm.identitymanager.application.command.ChangeUserPasswordCommand;
 import com.udm.identitymanager.application.command.RegisterPersonUserCommand;
 import com.udm.identitymanager.application.command.RegisterSystemUserCommand;
 import com.udm.identitymanager.domain.IdentityManagementException;
@@ -22,7 +23,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Oscar Rico (martinezr.oscar@gmail.com)
  */
-@Path("/users/")
+@Path("/user/")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class IdentityResource extends AssertionConcern {
@@ -45,6 +46,14 @@ public class IdentityResource extends AssertionConcern {
             IdentityManagementException {
         SystemUser systemUser =
                 identityApplicationService.registerUser(registerSystemUserCommand);
+        return true;
+    }
+
+    @POST
+    @Path("/changePassword")
+    public boolean registerUser(ChangeUserPasswordCommand changeUserPasswordCommand) throws
+            IdentityManagementException {
+        identityApplicationService.changeUserPassword(changeUserPasswordCommand);
         return true;
     }
 }

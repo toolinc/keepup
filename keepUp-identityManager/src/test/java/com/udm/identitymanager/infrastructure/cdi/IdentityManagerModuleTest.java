@@ -10,6 +10,7 @@ import com.udm.identitymanager.domain.DomainRegistry;
 import com.udm.identitymanager.domain.model.access.Group;
 import com.udm.identitymanager.domain.model.identity.PersonUser;
 import com.udm.identitymanager.domain.model.identity.SystemUser;
+import com.udm.identitymanager.domain.model.identity.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -24,7 +25,6 @@ import javax.persistence.PersistenceContext;
  */
 @ApplicationScoped
 public class IdentityManagerModuleTest {
-
 
     private static final String PERSISTENCE_UNIT = "keepUpIdentityManagerPUTest";
 
@@ -45,6 +45,12 @@ public class IdentityManagerModuleTest {
     @Produces
     public Repository<Event> produceEventRepository(EntityManager entityManager) {
         return new JpaRepository<Event>(entityManager) {
+        };
+    }
+
+    @Produces
+    public Repository<User> produceUserRepository(EntityManager entityManager) {
+        return new JpaRepository<User>(entityManager) {
         };
     }
 

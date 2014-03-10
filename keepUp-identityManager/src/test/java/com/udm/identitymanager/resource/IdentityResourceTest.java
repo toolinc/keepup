@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import com.udm.identitymanager.PersistenceTest;
+import com.udm.identitymanager.application.command.ChangeUserPasswordCommand;
 import com.udm.identitymanager.application.command.RegisterPersonUserCommand;
 import com.udm.identitymanager.application.command.RegisterSystemUserCommand;
 import com.udm.identitymanager.infrastructure.resource.GsonProvider;
@@ -15,7 +16,9 @@ import com.udm.identitymanager.infrastructure.resource.JaxRsActivator;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.net.URL;
 import java.util.GregorianCalendar;
@@ -34,9 +37,10 @@ import javax.ws.rs.core.Response;
  * @author Oscar Rico (martinezr.oscar@gmail.com)
  */
 @RunAsClient
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class IdentityResourceTest extends PersistenceTest {
     private static final String RESOURCE_PREFIX = JaxRsActivator.class
-            .getAnnotation(ApplicationPath.class).value().substring(1) + "/users/";
+            .getAnnotation(ApplicationPath.class).value().substring(1) + "/user/";
 
     private final String mediaType = MediaType.APPLICATION_JSON;
     @ArquillianResource private URL deploymentUrl;
@@ -71,6 +75,29 @@ public class IdentityResourceTest extends PersistenceTest {
         Response response = target.path("register/system")
                 .request()
                 .post(Entity.entity(command, mediaType), Response.class);
+        assertThat(response.getStatus(), is(200));
+        assertTrue(response.readEntity(Boolean.class));
+    }
+
+    @Test
+    public void shouldChangeUserPassword() throws Exception {
+        String userName = "restfulSystemUser";
+        String password = "1984!@#$kQwAXz$";
+        String newPassword = "newPass#1984!@#$kQwAXz$";
+        RegisterSystemUserCommand command = new RegisterSystemUserCommand(userName,
+                password, "newly rest System", "Tim", "Ford", "MALE",
+                new GregorianCalendar(1984, 9, 1).getTime(), true, null, null,
+                "tim.ford@gmail.com", "1234567890");
+        Response response = target.path("register/system")
+                .request()
+                .post(Entity.entity(command, mediaType), Response.class);
+        assertThat(response.getStatus(), is(200));
+        assertTrue(response.readEntity(Boolean.class));
+        ChangeUserPasswordCommand passwdCommand = new ChangeUserPasswordCommand(userName, password,
+                newPassword);
+        response = target.path("changePassword")
+                .request()
+                .post(Entity.entity(passwdCommand, mediaType), Response.class);
         assertThat(response.getStatus(), is(200));
         assertTrue(response.readEntity(Boolean.class));
     }

@@ -3,6 +3,7 @@
 package com.udm.identitymanager.application;
 
 import com.udm.identitymanager.PersistenceTest;
+import com.udm.identitymanager.application.command.ChangeUserPasswordCommand;
 import com.udm.identitymanager.application.command.RegisterPersonUserCommand;
 import com.udm.identitymanager.application.command.RegisterSystemUserCommand;
 import com.udm.identitymanager.domain.IdentityManagementException;
@@ -43,5 +44,20 @@ public class IdentityApplicationServiceTest extends PersistenceTest {
                         new GregorianCalendar(1990, 9, 9).getTime(), true, null, null,
                         "kerry.cathcart@gmail.com", "1234567890");
         identityApplicationService.registerUser(command);
+    }
+
+    @Test
+    public void shouldChangeUserPassword() throws IdentityManagementException {
+        String userName = "IdentityAppServicePersonUser2";
+        String password = "1979$@asTksas0";
+        String newPassword = "#4^VGhJEAWqj!283920K%l";
+        RegisterPersonUserCommand commandCreate =
+                new RegisterPersonUserCommand(userName, password,
+                        "Jim", "Napier", "MALE", new GregorianCalendar(1979, 6, 6).getTime(),
+                        true, null, null, "jim.napier@gmail.com", "1234567890");
+        identityApplicationService.registerUser(commandCreate);
+        ChangeUserPasswordCommand commandChange = new ChangeUserPasswordCommand(userName, password,
+                newPassword);
+        identityApplicationService.changeUserPassword(commandChange);
     }
 }

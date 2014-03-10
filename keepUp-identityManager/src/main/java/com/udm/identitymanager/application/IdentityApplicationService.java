@@ -3,6 +3,7 @@
 package com.udm.identitymanager.application;
 
 import com.udm.common.AssertionConcern;
+import com.udm.identitymanager.application.command.ChangeUserPasswordCommand;
 import com.udm.identitymanager.application.command.RegisterPersonUserCommand;
 import com.udm.identitymanager.application.command.RegisterSystemUserCommand;
 import com.udm.identitymanager.domain.IdentityManagementException;
@@ -91,5 +92,16 @@ public class IdentityApplicationService extends AssertionConcern {
                 .build();
         identityService.registerUser(systemUser);
         return systemUser;
+    }
+
+    /**
+     * Change the existing {@link com.udm.identitymanager.domain.model.identity.User} password.
+     *
+     * @param command the minimum required information to change the user password
+     * @throws IdentityManagementException if the password cannot be changed
+     */
+    public void changeUserPassword(ChangeUserPasswordCommand command) throws
+            IdentityManagementException {
+        identityService.changeUserPassword(command);
     }
 }

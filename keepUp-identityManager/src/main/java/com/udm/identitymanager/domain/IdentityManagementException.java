@@ -37,6 +37,12 @@ public class IdentityManagementException extends Exception {
         private Builder() {
         }
 
+        public Builder setMessage(String message) {
+            assertArgumentNotNull(message, "Message cannot be null.");
+            message = BUNDLE.getString(message);
+            return this;
+        }
+
         public Builder setMessage(String message, Object... params) {
             assertArgumentNotNull(message, "Message cannot be null.");
             assertArgumentNotNull(params, "Parameters cannot be null.");
