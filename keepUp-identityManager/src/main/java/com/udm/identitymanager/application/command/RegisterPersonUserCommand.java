@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author Oscar Rico (martinezr.oscar@gmail.com)
  */
-public class RegisterPersonUserCommand extends UserCommand {
+public class RegisterPersonUserCommand extends AbstractUserCommand {
 
     private PersonCommand person;
 

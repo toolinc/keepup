@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Oscar Rico (martinezr.oscar@gmail.com)
  */
-public abstract class UserCommand implements Command {
+public abstract class AbstractUserCommand implements Command {
 
     private String username;
     private String password;
@@ -19,8 +19,8 @@ public abstract class UserCommand implements Command {
     private Date startDate;
     private Date endDate;
 
-    public UserCommand (String username, String password, boolean enabled, Date startDate,
-                        Date endDate) {
+    public AbstractUserCommand(String username, String password, boolean enabled, Date startDate,
+                               Date endDate) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
